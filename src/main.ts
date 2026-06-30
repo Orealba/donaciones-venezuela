@@ -7,6 +7,7 @@ import { createSurveyForm } from './components/SurveyForm'
 import type { SurveyData } from './components/SurveyForm'
 import { createThanksPage } from './components/ThanksPage'
 import { createQuickThanksPage } from './components/QuickThanksPage'
+import { createInventoryPage } from './components/InventoryPage'
 
 document.body.className = 'bg-amber-50'
 
@@ -17,6 +18,12 @@ const landingClasses =
 const formClasses =
   'min-h-screen flex flex-col items-center gap-4 md:gap-6 px-8 md:px-8 py-6 md:py-8 lg:py-10 text-center w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto'
 
+function showInventory() {
+  app.innerHTML = ''
+  app.className = landingClasses
+  app.append(createInventoryPage(showLanding))
+}
+
 function showLanding() {
   app.innerHTML = ''
   app.className = landingClasses
@@ -25,7 +32,7 @@ function showLanding() {
     createHeaderFlags(),
     createHeroMessage(),
     mainButton,
-    createFooterLinks(),
+    createFooterLinks(showInventory),
   )
   mainButton.addEventListener('click', showSurvey)
 }
