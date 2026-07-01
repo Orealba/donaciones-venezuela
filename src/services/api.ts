@@ -1,9 +1,31 @@
 import { supabase } from '../lib/supabase'
 import type { SurveyData } from '../components/SurveyForm'
 
+interface GeoData {
+  ip_pais: string | null
+  ip_region: string | null
+  ip_ciudad: string | null
+}
+
+async function getGeoFromIP(): Promise<GeoData> {
+  try {
+    const res = await fetch('https://ipapi.co/json/')
+    const data = await res.json()
+    return {
+      ip_pais: data.country_name ?? null,
+      ip_region: data.region ?? null,
+      ip_ciudad: data.city ?? null,
+    }
+  } catch {
+    return { ip_pais: null, ip_region: null, ip_ciudad: null }
+  }
+}
+
 export async function registrarClick() {
+  const geo = await getGeoFromIP()
   await supabase.from('confirmaciones').insert({
     created_at: new Date().toISOString(),
+    ...geo,
   })
 }
 
@@ -26,11 +48,14 @@ export async function subirRespuesta(datos: SurveyData, archivo: File | null) {
     }
   }
 
+  const geo = await getGeoFromIP()
+
   await supabase.from('confirmaciones').insert({
     category: datos.category,
     condicion: datos.condicion,
     estado: datos.estado,
     imagen_url: imagenUrl,
     created_at: new Date().toISOString(),
+    ...geo,
   })
 }
