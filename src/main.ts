@@ -8,6 +8,7 @@ import type { SurveyData } from './components/SurveyForm'
 import { createThanksPage } from './components/ThanksPage'
 import { createQuickThanksPage } from './components/QuickThanksPage'
 import { createInventoryPage } from './components/InventoryPage'
+import { registrarClick, subirRespuesta } from './services/api'
 
 document.body.className = 'bg-amber-50'
 
@@ -34,7 +35,10 @@ function showLanding() {
     mainButton,
     createFooterLinks(showInventory),
   )
-  mainButton.addEventListener('click', showSurvey)
+  mainButton.addEventListener('click', () => {
+    registrarClick()
+    showSurvey()
+  })
 }
 
 function showSurvey() {
@@ -43,8 +47,7 @@ function showSurvey() {
   app.append(
     createSurveyForm(
       (data: SurveyData) => {
-        // TODO: conectar con Firebase para guardar los datos
-        console.log('Datos del formulario:', data)
+        subirRespuesta(data, data.file)
         showThanks()
       },
       showQuickThanks,
