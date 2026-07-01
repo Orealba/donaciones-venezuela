@@ -50,7 +50,14 @@ function showSurvey() {
         subirRespuesta(data, data.file)
         showThanks()
       },
-      showQuickThanks,
+      () => {
+        subirRespuesta(
+          { category: null, condicion: null, estado: null, file: null },
+          null,
+        )
+        showQuickThanks()
+      },
+      showLanding,
     ),
   )
 }

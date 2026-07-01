@@ -15,15 +15,15 @@ function createBoxIcon(): string {
 }
 
 function createCheckIcon(): string {
-  return `<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#10b981"/><path d="M6 10l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  return `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#10b981"/><path d="M6 10l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 }
 
 function createWarningIcon(): string {
-  return `<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2L1 18h18L10 2z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/><path d="M10 8v4M10 14.5v.5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`
+  return `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L1 18h18L10 2z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"/><path d="M10 8v4M10 14.5v.5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`
 }
 
 function createXIcon(): string {
-  return `<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#ef4444"/><path d="M7 7l6 6M13 7l-6 6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`
+  return `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#ef4444"/><path d="M7 7l6 6M13 7l-6 6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`
 }
 
 interface CategoryOption {
@@ -79,7 +79,7 @@ function createCategorySection(): HTMLElement {
   label.className = 'text-xs md:text-sm font-medium text-stone-700'
 
   const grid = document.createElement('div')
-  grid.className = 'grid grid-cols-2 gap-1 w-full category-grid'
+  grid.className = 'grid grid-cols-2 gap-2 w-full category-grid'
 
   const options: CategoryOption[] = [
     { icon: createPillIcon(), label: 'Medicinas' },
@@ -93,24 +93,24 @@ function createCategorySection(): HTMLElement {
   options.forEach((option) => {
     const btn = document.createElement('button')
     btn.type = 'button'
-    btn.innerHTML = `<span class="text-sm">${option.icon}</span><span>${option.label}</span>`
+    btn.innerHTML = `<span class="text-base">${option.icon}</span><span>${option.label}</span>`
     btn.className =
-      'flex flex-col items-center justify-center gap-0 py-1 px-1 border border-stone-300 rounded-md bg-white text-stone-700 text-[10px] font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
+      'flex flex-col items-center justify-center gap-0 py-1.5 px-2 border border-stone-300 rounded-md bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
 
     btn.addEventListener('click', () => {
       if (selectedBtn && selectedBtn !== btn) {
         selectedBtn.className =
-          'flex flex-col items-center justify-center gap-0 py-1 px-1 border border-stone-300 rounded-md bg-white text-stone-700 text-[10px] font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
+          'flex flex-col items-center justify-center gap-0 py-1.5 px-2 border border-stone-300 rounded-md bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
         delete selectedBtn.dataset.selected
       }
       if (btn === selectedBtn) {
         selectedBtn = null
         btn.className =
-          'flex flex-col items-center justify-center gap-0 py-1 px-1 border border-stone-300 rounded-md bg-white text-stone-700 text-[10px] font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
+          'flex flex-col items-center justify-center gap-0 py-1.5 px-2 border border-stone-300 rounded-md bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors'
         delete btn.dataset.selected
       } else {
         btn.className =
-          'flex flex-col items-center justify-center gap-0 py-1 px-1 border border-emerald-600 rounded-md bg-emerald-50 text-emerald-800 text-[10px] font-medium transition-colors'
+          'flex flex-col items-center justify-center gap-0 py-1.5 px-2 border border-emerald-600 rounded-md bg-emerald-50 text-emerald-800 text-xs font-medium transition-colors'
         btn.dataset.selected = 'true'
         selectedBtn = btn
       }
@@ -132,7 +132,7 @@ function createCondicionSection(): HTMLElement {
   label.className = 'text-xs md:text-sm font-medium text-stone-700'
 
   const list = document.createElement('div')
-  list.className = 'flex flex-col gap-1.5 w-full condicion-list'
+  list.className = 'flex flex-col gap-2 w-full condicion-list'
 
   const options: CondicionOption[] = [
     { icon: createCheckIcon(), label: 'Perfecta' },
@@ -147,22 +147,22 @@ function createCondicionSection(): HTMLElement {
     btn.type = 'button'
     btn.innerHTML = `<span class="flex-shrink-0">${option.icon}</span><span>${option.label}</span>`
     btn.className =
-      'flex items-center gap-2 py-2 px-3 border border-stone-300 rounded-lg bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
+      'flex items-center gap-3 py-3 px-4 border border-stone-300 rounded-lg bg-white text-stone-700 text-sm font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
 
     btn.addEventListener('click', () => {
       if (selectedBtn && selectedBtn !== btn) {
         selectedBtn.className =
-          'flex items-center gap-2 py-2 px-3 border border-stone-300 rounded-lg bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
+          'flex items-center gap-3 py-3 px-4 border border-stone-300 rounded-lg bg-white text-stone-700 text-sm font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
         delete selectedBtn.dataset.selected
       }
       if (btn === selectedBtn) {
         selectedBtn = null
         btn.className =
-          'flex items-center gap-2 py-2 px-3 border border-stone-300 rounded-lg bg-white text-stone-700 text-xs font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
+          'flex items-center gap-3 py-3 px-4 border border-stone-300 rounded-lg bg-white text-stone-700 text-sm font-medium hover:border-emerald-400 hover:bg-emerald-50 transition-colors w-full text-left'
         delete btn.dataset.selected
       } else {
         btn.className =
-          'flex items-center gap-2 py-2 px-3 border border-emerald-600 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-medium transition-colors w-full text-left'
+          'flex items-center gap-3 py-3 px-4 border border-emerald-600 rounded-lg bg-emerald-50 text-emerald-800 text-sm font-medium transition-colors w-full text-left'
         btn.dataset.selected = 'true'
         selectedBtn = btn
       }
@@ -186,7 +186,7 @@ function createEstadoSelect(): HTMLElement {
   const select = document.createElement('select')
   select.id = 'estado-select'
   select.className =
-    'w-full py-2 px-3 border border-stone-300 rounded-lg bg-white text-stone-700 text-xs font-medium focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none'
+    'w-full py-2.5 px-3 border border-stone-300 rounded-lg bg-white text-stone-700 text-base font-medium focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none'
 
   const placeholder = document.createElement('option')
   placeholder.value = ''
@@ -257,16 +257,25 @@ function createPhotoSection(): HTMLElement {
 export function createSurveyForm(
   onSubmit: (data: SurveyData) => void,
   onSkip: () => void,
+  onBack: () => void,
 ): HTMLElement {
   const container = document.createElement('div')
-  container.className = 'flex flex-col gap-4 w-full'
+  container.className = 'flex flex-col gap-5 w-full'
+
+  const homeBtn = document.createElement('button')
+  homeBtn.type = 'button'
+  homeBtn.className =
+    'self-start text-stone-400 hover:text-stone-600 transition-colors text-lg p-1 -mb-2'
+  homeBtn.textContent = '🏠'
+  homeBtn.setAttribute('aria-label', 'Volver al inicio')
+  homeBtn.addEventListener('click', onBack)
 
   const h3 = document.createElement('h3')
-  h3.className = 'text-lg md:text-xl lg:text-2xl font-bold text-stone-800'
+  h3.className = 'text-xl md:text-2xl lg:text-3xl font-bold text-stone-800'
   h3.textContent = '¡Qué alivio saber que llegó!'
 
   const p = document.createElement('p')
-  p.className = 'text-xs md:text-sm text-stone-600'
+  p.className = 'text-sm md:text-base text-stone-600'
   p.textContent =
     'Si tienes un minutito, cuéntanos cómo llegó todo, y ayúdanos a seguir con nuestra misión'
 
@@ -303,6 +312,7 @@ export function createSurveyForm(
   skipBtn.addEventListener('click', onSkip)
 
   container.append(
+    homeBtn,
     h3,
     p,
     createCategorySection(),
