@@ -2,7 +2,7 @@
 
 Aplicación web para confirmar la recepción de cajas de ayuda humanitaria enviadas a Venezuela. Se abre escaneando un código QR desde un teléfono.
 
-> **Hecho íntegramente con [opencode](https://github.com/anomalyco/opencode)** — un CLI de IA para ingeniería de software. Tiempo de desarrollo: **~8 horas** de trabajo activo.
+> **Hecho íntegramente con [opencode](https://github.com/anomalyco/opencode)** — un CLI de IA para ingeniería de software. Tiempo de desarrollo: **~5-6 horas** de trabajo activo.
 
 ## Contexto
 
