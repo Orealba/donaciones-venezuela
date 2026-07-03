@@ -6,7 +6,7 @@ Aplicación web para confirmar la recepción de cajas de ayuda humanitaria envia
 
 ## Contexto
 
-Organizamos una recolección de donaciones en **Rubí (Barcelona, España)** para enviar cajas de alimentos, medicinas y ropa a familias en Venezuela. Necesitábamos una forma de saber si las cajas estaban llegando a destino. Creamos esta web para que, al recibir una caja, la persona escanee un QR y confirme la recepción.
+Organizamos una recolección de donaciones en **Barcelona, España** para enviar cajas de alimentos, medicinas y ropa a familias en Venezuela. Necesitábamos una forma de saber si las cajas estaban llegando a destino. Creamos esta web para que, al recibir una caja, la persona escanee un QR y confirme la recepción.
 
 ## Diseño
 
