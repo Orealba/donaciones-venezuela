@@ -2,7 +2,6 @@ import './style.css'
 import { createHeaderFlags } from './components/HeaderFlags'
 import { createHeroMessage } from './components/HeroMessage'
 import { createMainButton } from './components/MainButton'
-import { createFooterLinks } from './components/FooterLinks'
 import { createSurveyForm } from './components/SurveyForm'
 import type { SurveyData } from './components/SurveyForm'
 import { createThanksPage } from './components/ThanksPage'
@@ -19,6 +18,8 @@ const landingClasses =
 const formClasses =
   'min-h-screen flex flex-col items-center gap-4 md:gap-6 px-8 md:px-8 py-6 md:py-8 lg:py-10 text-center w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto'
 
+let currentClickId: string | null = null
+
 function showInventory() {
   app.innerHTML = ''
   app.className = landingClasses
@@ -26,6 +27,7 @@ function showInventory() {
 }
 
 function showLanding() {
+  currentClickId = null
   app.innerHTML = ''
   app.className = landingClasses
   const mainButton = createMainButton()
@@ -33,10 +35,9 @@ function showLanding() {
     createHeaderFlags(),
     createHeroMessage(),
     mainButton,
-    createFooterLinks(showInventory),
   )
-  mainButton.addEventListener('click', () => {
-    registrarClick()
+  mainButton.addEventListener('click', async () => {
+    currentClickId = await registrarClick()
     showSurvey()
   })
 }
@@ -47,13 +48,14 @@ function showSurvey() {
   app.append(
     createSurveyForm(
       (data: SurveyData) => {
-        subirRespuesta(data, data.file)
+        subirRespuesta(data, data.file, currentClickId)
         showThanks()
       },
       () => {
         subirRespuesta(
           { category: null, condicion: null, estado: null, file: null },
           null,
+          currentClickId,
         )
         showQuickThanks()
       },

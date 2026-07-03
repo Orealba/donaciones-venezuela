@@ -21,15 +21,22 @@ async function getGeoFromIP(): Promise<GeoData> {
   }
 }
 
-export async function registrarClick() {
+export async function registrarClick(): Promise<string | null> {
   const geo = await getGeoFromIP()
-  await supabase.from('confirmaciones').insert({
+  const { data, error } = await supabase.from('confirmaciones').insert({
+    tipo: 'click',
     created_at: new Date().toISOString(),
     ...geo,
-  })
+  }).select('id').single()
+
+  if (error) {
+    console.error('Error al registrar click:', error)
+    return null
+  }
+  return data?.id ?? null
 }
 
-export async function subirRespuesta(datos: SurveyData, archivo: File | null) {
+export async function subirRespuesta(datos: SurveyData, archivo: File | null, clickId: string | null = null) {
   let imagenUrl: string | null = null
 
   if (archivo) {
@@ -50,12 +57,21 @@ export async function subirRespuesta(datos: SurveyData, archivo: File | null) {
 
   const geo = await getGeoFromIP()
 
-  await supabase.from('confirmaciones').insert({
+  const payload = {
+    tipo: 'respuesta',
     category: datos.category,
     condicion: datos.condicion,
     estado: datos.estado,
     imagen_url: imagenUrl,
-    created_at: new Date().toISOString(),
     ...geo,
-  })
+  }
+
+  if (clickId) {
+    await supabase.from('confirmaciones').update(payload).eq('id', clickId)
+  } else {
+    await supabase.from('confirmaciones').insert({
+      ...payload,
+      created_at: new Date().toISOString(),
+    })
+  }
 }
