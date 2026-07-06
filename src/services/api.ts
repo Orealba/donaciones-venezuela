@@ -24,7 +24,6 @@ async function getGeoFromIP(): Promise<GeoData> {
 export async function registrarClick(): Promise<string | null> {
   const geo = await getGeoFromIP()
   const { data, error } = await supabase.from('confirmaciones').insert({
-    tipo: 'click',
     created_at: new Date().toISOString(),
     ...geo,
   }).select('id').single()
@@ -58,7 +57,6 @@ export async function subirRespuesta(datos: SurveyData, archivo: File | null, cl
   const geo = await getGeoFromIP()
 
   const payload = {
-    tipo: 'respuesta',
     category: datos.category,
     condicion: datos.condicion,
     estado: datos.estado,
